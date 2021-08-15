@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'djoser',
+
     'src.profiles',
 ]
 
@@ -151,3 +152,5 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
    # 'AUTH_HEADER_TYPES': ('JWT',),
 }
+
+AUTH_USER_MODEL = 'profiles.SocUser'
