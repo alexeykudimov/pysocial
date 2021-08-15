@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  pysocial_back:
+    build: ./
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env.dev
+  pysocial_db:
+    image: postgres:13.0-alpine
+    volumes:
+      - pysocial_postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./.env.dev
+
+volumes:
+  pysocial_postgres_data:
