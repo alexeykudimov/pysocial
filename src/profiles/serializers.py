@@ -4,6 +4,8 @@ from .models import SocUser
 
 class GetSocUserSerializer(serializers.ModelSerializer):
     # Получение информации о пользователе
+    avatar = serializers.ImageField(read_only=True)
+
     class Meta:
         model = SocUser
         exclude = (
@@ -32,3 +34,12 @@ class GetSocUserPublicSerializer(serializers.ModelSerializer):
             "groups",
             "user_permissions"
         )
+
+
+class SocUserByFollowerSerializer(serializers.ModelSerializer):
+    # Получение информации о фолловере
+    avatar = serializers.ImageField(read_only=True)
+
+    class Meta:
+        model = SocUser
+        fields = ('id', 'username', 'avatar')
