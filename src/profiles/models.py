@@ -7,19 +7,26 @@ class SocUser(AbstractUser):
         ('male', 'male'),
         ('female', 'female')
     )
-    middle_name = models.CharField(max_length=50, blank=True, null=True)
-    first_login = models.DateTimeField(blank=True, null=True)
-    phone = models.CharField(max_length=14)
-    avatar = models.ImageField(upload_to='user/avatar/', blank=True, null=True)
-    bio = models.TextField(blank=True, null=True)
+    first_login = models.DateTimeField(blank=True, null=True, verbose_name='Дата первого входа')
+    phone = models.CharField(max_length=14, verbose_name='Номер телефона')
+    avatar = models.ImageField(upload_to='user/avatar/', blank=True, null=True, verbose_name='Аватар')
+    bio = models.TextField(blank=True, null=True, verbose_name='Биография')
     github = models.CharField(max_length=500, blank=True, null=True)
-    birthday = models.DateField(blank=True, null=True)
-    gender = models.CharField(max_length=6, choices=GENDER, default='male')
-    technology = models.ManyToManyField('Technology', related_name='users')
+    birthday = models.DateField(blank=True, null=True, verbose_name='Дата рождения')
+    gender = models.CharField(max_length=6, choices=GENDER, default='male', verbose_name='Пол')
+    technology = models.ManyToManyField('Technology', related_name='users', verbose_name='Технологии')
+
+    class Meta:
+        verbose_name = 'пользователя'
+        verbose_name_plural = 'пользователи'
 
 
 class Technology(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, verbose_name='Название')
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'технологию'
+        verbose_name_plural = 'технологии'
