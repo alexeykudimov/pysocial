@@ -6,7 +6,7 @@ class Follower(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='owner', verbose_name='Пользователь'
     )
-    follower = models.ForeignKey(
+    subscriber = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='followers', verbose_name='Подписчик'
     )
 

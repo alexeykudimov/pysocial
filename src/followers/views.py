@@ -14,6 +14,7 @@ class ListFollowerView(generics.ListAPIView):
     def get_queryset(self):
         return Follower.objects.filter(user=self.request.user)
 
+
 class FollowerView(views.APIView):
     # Добавление/удаление подписчиков
 
@@ -21,7 +22,7 @@ class FollowerView(views.APIView):
 
     def post(self, request, pk):
         try:
-            user = SocUser.objects.filter(id=pk)
+            user = SocUser.objects.filter(id=pk).first()
         except Follower.DoesNotExist:
             return Response(status=404)
 
