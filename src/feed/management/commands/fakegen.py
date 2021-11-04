@@ -8,11 +8,14 @@ from random import randrange
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        self.create_user(10)
-        self.create_follower()
-        self.create_post(10)
+        if SocUser.objects.count() < 10:
+            self.create_user(10)
+            self.create_follower()
+            self.create_post(10)
 
-        self.stdout.write('Success')
+            self.stdout.write('Success')
+        else:
+            self.stdout.write('Users already generated')
 
     def create_user(self, count):
         first_names = [
@@ -55,7 +58,7 @@ class Command(BaseCommand):
     def create_follower(self):
         users = SocUser.objects.order_by()[2:]
         for user in users:
-            Follower.objects.create(user=user, follower_id=1)
+            Follower.objects.create(user=user, subscriber_id=1)
 
     def create_post(self, count):
         users = SocUser.objects.all()
